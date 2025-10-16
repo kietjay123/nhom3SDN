@@ -1,17 +1,19 @@
-const express = require('express');
-const app = express();
+const mongoose = require('mongoose');
+const http = require('http');
+const app = require('./app');
+require('dotenv').config();
 
-const PORT = process.env.PORT || 5000;
+const server = http.createServer(app);
 
-// Middleware (optional)
-app.use(express.json());
+mongoose
+  .connect(process.env.MONGO_URI,)
+  .catch((err) => {
+    console.error('❌ MongoDB connection error:', err.message);
+    process.exit(1);
+  });
 
-// Simple route for testing
-app.get('/', (req, res) => {
-  res.send('Server is running!');
-});
+const PORT = process.env.PORT || 3000;
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server started on port ${PORT}`);
+server.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
