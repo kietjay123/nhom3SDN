@@ -4,7 +4,10 @@ const morgan = require('morgan');
 const models = require('./models');
 const app = express();
 
+const areaRoutes = require('./router/area.route');
+const batchRoutes = require('./router/batch.route');
 const corsOptions = {
+
   origin: (origin, callback) => {
     if (!origin) return callback(null, true);
 
@@ -29,8 +32,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 
-
-
+// Routers
+app.use('/api/areas', areaRoutes);
+app.use('/api/batches', batchRoutes);
 
 app.use(cors(corsOptions));
 
