@@ -1,0 +1,26 @@
+const InventoryCheckInspection = require('../models/InventoryCheckInspection');
+
+module.exports = {
+  authController: require('./authController'),
+  cronController: require('./cronController'),
+  mailController: require('./mailController'),
+  userController: require('./userController'),
+  medicineController: require('./medicineController'),
+  batchController: require('./batchController'),
+  importOrderController: require('./importOrderController'),
+  locationController: require('./locationController'),
+  notificationController: require('./notificationController'),
+  thingsboardController: require('./thingsboardController'),
+  importInspectionController: require('./importInspectionController'),
+  areaController: require('./areaController'),
+  supplierController: require('./supplierController'),
+  retailerController: require('./retailerController'),
+  stripeController: require('./stripeController'),
+  packageController: require('./packageController'),
+  billController: require('./billController'),
+  exportOrderController: require('./exportOrderController'),
+  userController: require('./userController'),
+  inventoryController: require('./inventoryController'),
+  inventoryCheckInspectionController: require('./inventoryCheckInspectionController'),
+  logLocationChangeController: require('./logLocationChangeController'),
+};
