@@ -9,9 +9,8 @@ const Supplier = require('./Supplier');
 const ImportInspection = require('./ImportInspection');
 const LogLocationChange = require('./LogLocationChange');
 const Retailer = require('./Retailer');
+const Contract = require('./Contract');
 const ExportOrder = require('./ExportOrder');
-const InventoryCheckInspection = require('./InventoryCheckInspection');
-const InventoryCheckOrder = require('./InventoryCheckOrder');
 
 module.exports = {
   User,
@@ -26,6 +25,4 @@ module.exports = {
   LogLocationChange,
   Retailer,
   ExportOrder,
-  InventoryCheckInspection,
-  InventoryCheckOrder
 };

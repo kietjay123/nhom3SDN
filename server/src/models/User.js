@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { otpSchema } = require('./subSchemas'); // Import sub-schema cho OTP
 const constants = require('../utils/constants'); // Import các hằng số nếu cần thiết
 
 // Schema chính cho User
@@ -31,7 +32,15 @@ const userSchema = new mongoose.Schema({
       message: `Status must be one of: ${Object.values(constants.USER_STATUSES).join(', ')}`,
     },
     default: constants.USER_STATUSES.ACTIVE,
-  }
+  },
+  otp_login: {
+    type: otpSchema,
+    default: null,
+  },
+  otp_reset: {
+    type: otpSchema,
+    default: null,
+  },
 });
 
 module.exports = mongoose.model('User', userSchema);

@@ -13,6 +13,10 @@ const medicineSchema = new mongoose.Schema({
     required: [true, 'Medicine code is required'],
     trim: true,
   },
+  storage_conditions: {
+    type: storageConditionsSchema,
+    required: false,
+  },
 
   category: {
     type: String,

@@ -1,0 +1,27 @@
+// routes/index.js
+module.exports = {
+  authRoutes: require('./authRoute'),
+  cronRoutes: require('./cronRoute'),
+  medicineRoutes: require('./medicineRoute'),
+  supervisorRoutes: require('./supervisorRoute'),
+  packageRoutes: require('./packageRoute'),
+  importOrderRoutes: require('./importOrderRoutes'),
+  accountRoutes: require('./accountRoute'),
+  importInspectionRoutes: require('./importInspectionRoute'),
+  inspectionRoutes: require('./inspectionRoute'),
+  batchRoutes: require('./batchRoute'),
+  areaRoutes: require('./areaRoute'),
+  locationRoutes: require('./locationRoute'),
+  supplierRoutes: require('./supplierRoute'),
+  retailerRoutes: require('./retailerRoute'),
+  batchRoutes: require('./batchRoute'),
+  exportOrderRoutes: require('./exportOrderRoute'),
+  userRoutes: require('./userRoute'),
+  contractRoutes: require('./contractRoute'),
+  inventoryCheckOrderRoutes: require('./inventoryCheckOrderRoute'),
+  inventoryRoutes: require('./inventoryRoutes'),
+  inventoryCheckInspectionRoutes: require('./inventoryCheckInspectionRoute'),
+  logLocationChangeRoute: require('./logLocationChangeRoute'),
+
+  searchRoutes: require('./searchRoute'),
+};

@@ -6,10 +6,7 @@ const packageService = require('../services/packageService');
 const LogLocationChange = require('../models/LogLocationChange');
 const { EXPORT_ORDER_STATUSES, USER_ROLES } = require('../utils/constants');
 const exportOrderService = require('../services/exportOrderService');
-const notificationService = require('../services/notificationService');
 const mongoose = require('mongoose');
-const InventoryCheckInspection = require('../models/InventoryCheckInspection');
-const Location = require('../models/Location');
 
 // Helper function for population to ensure consistent data structure
 const populateOptions = [
@@ -231,39 +228,6 @@ const completeExportOrder = async (req, res) => {
 
       const io = req.app.locals.io;
 
-      try {
-        const newNotification = await notificationService.createNotificationForAllSupervisors(
-          {
-            title: 'Đơn hàng xuất kho hoàn thành',
-            message: `Đơn hàng xuất kho #${id.slice(-6)} đã được hoàn thành thành công.`,
-            type: 'export',
-            priority: 'medium',
-            sender_id: user._id,
-            action_url: `/sp-manage-bills`,
-            metadata: {
-              orderId: id,
-              statusChangedTo: 'completed',
-              orderType: 'export',
-              action: 'order_completed',
-              warehouseManagerId: user._id,
-            },
-          },
-          io,
-        );
-
-        if (newNotification && io) {
-          console.log('Emitting newNotification to system room');
-          io.to('system').emit('newNotification', newNotification);
-        } else {
-          console.log('Cannot emit: io =', io);
-        }
-
-        console.log(`Đã tạo notification cho supervisor về đơn hàng xuất kho #${id} hoàn thành`);
-      } catch (notificationError) {
-        console.error('Lỗi khi tạo notification:', notificationError);
-        // Không throw error vì notification không ảnh hưởng đến việc hoàn thành đơn hàng
-      }
-
       return res.json({
         success: true,
         message: 'Đơn xuất kho đã hoàn thành thành công',
@@ -343,29 +307,6 @@ const createExportOrder = async (req, res) => {
     }
     const newOrder = await exportOrderService.createExportOrder(req.body, userId);
 
-    const newNotification = await notificationService.createNotificationForAllRepresentativeManager(
-      {
-        title: 'Đơn nhập mới đang chờ bạn duyệt',
-        message: `Đơn nhập #${newOrder._id} vừa được tạo và đang chờ duyệt.`,
-        type: 'export',
-        priority: 'high',
-        action_url: '/rm-export-orders-approval',
-        metadata: {
-          order_id: newOrder._id,
-          order_status: newOrder.status,
-          order_type: 'import',
-        },
-        sender_id: userId,
-      },
-      io,
-    );
-
-    if (newNotification && io) {
-      console.log('Emitting newNotification to system room');
-      io.to('system').emit('newNotification', newNotification);
-    } else {
-      console.log('Cannot emit: io =', io);
-    }
     res.status(201).json({ success: true, data: newOrder });
   } catch (error) {
     res.status(400).json({
@@ -590,36 +531,7 @@ const approveExportOrder = async (req, res, next) => {
 
     const approvedOrder = await exportOrderService.approveExportOrder(id, userId);
 
-    // Notify representative (creator) about approval
-    try {
-      if (approvedOrder && approvedOrder.created_by) {
-        const newNotification = await notificationService.createNotification(
-          {
-            recipient_id: approvedOrder.created_by,
-            title: 'Đơn xuất kho được phê duyệt',
-            message: `Đơn xuất kho #${id.slice(-6)} đã được phê duyệt.`,
-            type: 'export',
-            priority: 'medium',
-            action_url: `/rp-export-orders`,
-            metadata: {
-              order_id: id,
-              order_status: 'approved',
-              order_type: 'export',
-              status_change_date: new Date(),
-              changed_by: userId,
-            },
-          },
-          io,
-        );
-
-        if (newNotification && io) {
-          io.to('system').emit('newNotification', newNotification);
-        }
-      }
-    } catch (notifyErr) {
-      console.error('Lỗi khi tạo notification cho RP (approve export):', notifyErr);
-    }
-
+    
     res.status(200).json({
       success: true,
       data: approvedOrder,
@@ -647,35 +559,6 @@ const rejectExportOrder = async (req, res, next) => {
 
     const rejectedOrder = await exportOrderService.rejectExportOrder(id, userId);
 
-    // Notify representative (creator) about rejection
-    try {
-      if (rejectedOrder && rejectedOrder.created_by) {
-        const newNotification = await notificationService.createNotification(
-          {
-            recipient_id: rejectedOrder.created_by,
-            title: 'Đơn xuất kho bị từ chối',
-            message: `Đơn xuất kho #${id.slice(-6)} đã bị từ chối.`,
-            type: 'export',
-            priority: 'medium',
-            action_url: `/rp-export-orders`,
-            metadata: {
-              order_id: id,
-              order_status: 'rejected',
-              order_type: 'export',
-              status_change_date: new Date(),
-              changed_by: userId,
-            },
-          },
-          io,
-        );
-
-        if (newNotification && io) {
-          io.to('system').emit('newNotification', newNotification);
-        }
-      }
-    } catch (notifyErr) {
-      console.error('Lỗi khi tạo notification cho RP (reject export):', notifyErr);
-    }
 
     res.status(200).json({
       success: true,
