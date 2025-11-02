@@ -1,7 +1,6 @@
 // routes/index.js
 module.exports = {
   authRoutes: require('./authRoute'),
-  cronRoutes: require('./cronRoute'),
   medicineRoutes: require('./medicineRoute'),
   supervisorRoutes: require('./supervisorRoute'),
   packageRoutes: require('./packageRoute'),
@@ -22,6 +21,4 @@ module.exports = {
   inventoryRoutes: require('./inventoryRoutes'),
   inventoryCheckInspectionRoutes: require('./inventoryCheckInspectionRoute'),
   logLocationChangeRoute: require('./logLocationChangeRoute'),
-
-  searchRoutes: require('./searchRoute'),
 };

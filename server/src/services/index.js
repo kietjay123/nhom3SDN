@@ -1,6 +1,4 @@
 const authService = require('./authService');
-const cronService = require('./cronService');
-const emailService = require('./emailService');
 const importOrderService = require('./importOrderService');
 const inspectionService = require('./inspectionService');
 const medicineService = require('./medicineService');
@@ -28,7 +26,6 @@ module.exports = new Promise(async (resolve) => {
   resolve({
     ...mailtrapService,
     ...authService,
-    ...cronService,
     ...emailService,
     ...importOrderService,
     ...inspectionService,

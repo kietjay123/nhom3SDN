@@ -2,8 +2,6 @@ const InventoryCheckInspection = require('../models/InventoryCheckInspection');
 
 module.exports = {
   authController: require('./authController'),
-  cronController: require('./cronController'),
-  mailController: require('./mailController'),
   userController: require('./userController'),
   medicineController: require('./medicineController'),
   batchController: require('./batchController'),

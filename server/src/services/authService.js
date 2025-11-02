@@ -3,7 +3,6 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const constants = require('../utils/constants');
-const { sendOTPEmail } = require('./emailService');
 const getRedirectByRole = require('../utils/directUrl');
 const crypto = require('crypto');
 
@@ -136,7 +135,7 @@ const authService = {
         },
       });
 
-      await sendOTPEmail(user.email, otp);
+      
 
       const tempToken = jwt.sign(
         { userId: user._id, step: 'otp_verification' },

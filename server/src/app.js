@@ -78,7 +78,6 @@ app.get('/api/test-auth', authenticate, (req, res) => {
 });
 // Public routes
 app.use('/api/auth', route.authRoutes);
-app.use('/api/cron', route.cronRoutes);
 app.use('/api/medicine', route.medicineRoutes);
 app.use('/api/import-inspections', route.importInspectionRoutes);
 app.use('/api/batch', route.batchRoutes);
@@ -102,7 +101,6 @@ app.use(
   route.userRoutes,
 );
 
-app.use('/api/export-orders', route.exportOrderRoutes);
 
 // Protected routes với role-based access
 app.use(
@@ -112,20 +110,14 @@ app.use(
   route.accountRoutes,
 );
 
-// Import orders - protected route
 app.use('/api/import-orders', route.importOrderRoutes);
-// app.use('/api/export-orders', route.exportOrderRoutes);
+app.use('/api/export-orders', route.exportOrderRoutes);
 app.use('/api/supplier', route.supplierRoutes);
 app.use('/api/retailer', route.retailerRoutes);
 app.use('/api/contract', route.contractRoutes);
 app.use('/api/inventory-check-inspections', route.inventoryCheckInspectionRoutes);
 app.use('/api/inventory-check-orders', route.inventoryCheckOrderRoutes);
 app.use('/api/inventory', route.inventoryRoutes);
-
-
-
-// Search routes - protected với authentication
-app.use('/api/search', route.searchRoutes);
 
 app.use(
   '/api/shared',
@@ -139,9 +131,6 @@ app.use(
     });
   },
 );
-
-const startAllCrons = require('./cron');
-startAllCrons();
 
 app.use(cors(corsOptions));
 
