@@ -368,7 +368,6 @@ export default function ManageImportOrders() {
             <TableRow>
               <TableCell>{trans.manageImportOrders.importDateCol}</TableCell>
               <TableCell>{trans.manageImportOrders.typeCol}</TableCell>
-              <TableCell>{trans.manageImportOrders.contractCode}</TableCell>
               <TableCell>{trans.manageImportOrders.supplier}</TableCell>
               <TableCell>{trans.manageImportOrders.managerEmail}</TableCell>
               <TableCell>{trans.manageImportOrders.statusCol}</TableCell>
@@ -395,7 +394,6 @@ export default function ManageImportOrders() {
                       <Chip label={trans.manageImportOrders.internal} color="warning" size="small" />
                     )}
                   </TableCell>
-                  <TableCell>{o.contract_id?.contract_code || '—'}</TableCell>
                   <TableCell>{o.contract_id?.partner_id?.name || '—'}</TableCell>
                   <TableCell>{o.warehouse_manager_id?.email || '—'}</TableCell>
                   <TableCell>

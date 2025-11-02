@@ -256,7 +256,6 @@ export default function ManageExportOrders() {
             <TableRow>
               <TableCell>{trans?.common?.exportDate || 'Export Date'}</TableCell>
               <TableCell>{trans?.common?.type || 'Type'}</TableCell>
-              <TableCell>{trans?.common?.contractCode || 'Contract Code'}</TableCell>
               <TableCell>{trans?.common?.partner || 'Partner'}</TableCell>
               <TableCell>{trans?.common?.managerEmail || 'Manager Email'}</TableCell>
               <TableCell>{trans?.common?.status || 'Status'}</TableCell>
@@ -283,7 +282,6 @@ export default function ManageExportOrders() {
                       <Chip label={trans?.common?.internal || 'Internal'} color="warning" size="small" />
                     )}
                   </TableCell>
-                  <TableCell>{o.contract_id?.contract_code || '—'}</TableCell>
                   <TableCell>{o.contract_id?.partner_id?.name || '—'}</TableCell>
                   <TableCell>{o.warehouse_manager_id?.email || '—'}</TableCell>
                   <TableCell>

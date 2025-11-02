@@ -3,39 +3,10 @@
 import { Refresh as RefreshIcon, Search as SearchIcon, QrCodeScanner, Add as AddIcon } from '@mui/icons-material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import {
-  Alert,
-  Box,
-  Button,
-  Chip,
-  CircularProgress,
-  IconButton,
-  MenuItem,
-  Paper,
-  Snackbar,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TablePagination,
-  TableRow,
-  TextField,
-  Typography,
-  Stack,
-  Menu,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Grid,
-  Card,
-  Divider,
-  Checkbox,
-  FormControlLabel,
-  Select,
-  InputLabel,
-  FormControl,
-  Tooltip
+  Alert,Box,Button,Chip,CircularProgress,IconButton,MenuItem,Paper,Snackbar,Table,TableBody,
+  TableCell,TableContainer,TableHead,TablePagination,TableRow,TextField,Typography,
+  Stack,Menu,Dialog,DialogTitle,DialogContent,DialogActions,Grid,Card,Divider,Checkbox,FormControlLabel,
+  Select,InputLabel,FormControl,Tooltip
 } from '@mui/material';
 import { Delete } from '@mui/icons-material';
 import axios from 'axios';
@@ -930,7 +901,6 @@ export default function ManageExportOrders() {
             <TableRow>
               <TableCell>{trans.manageExportOrders.exportDateCol}</TableCell>
               <TableCell>{trans.manageExportOrders.typeCol}</TableCell>
-              <TableCell>{trans.manageExportOrders.contractCode}</TableCell>
               <TableCell>{trans.manageExportOrders.partner}</TableCell>
               <TableCell>{trans.manageExportOrders.managerEmail}</TableCell>
               <TableCell>{trans.manageExportOrders.statusCol}</TableCell>
@@ -957,7 +927,6 @@ export default function ManageExportOrders() {
                       <Chip label="Internal" color="warning" size="small" />
                     )}
                   </TableCell>
-                  <TableCell>{o.contract_id?.contract_code || '—'}</TableCell>
                   <TableCell>{o.contract_id?.partner_id?.name || '—'}</TableCell>
                   <TableCell>{o.contract_id ? o.warehouse_manager_id?.email || '—' : o.created_by?.email || '—'}</TableCell>
                   <TableCell>

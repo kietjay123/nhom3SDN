@@ -250,7 +250,6 @@ export default function ManageImportOrders() {
           <TableHead>
             <TableRow>
               <TableCell>{trans.common.importDate}</TableCell>
-              <TableCell>{trans.common.contractCode}</TableCell>
               <TableCell>{trans.common.supplier}</TableCell>
               <TableCell>{trans.common.managerEmail}</TableCell>
               <TableCell>{trans.common.status}</TableCell>
@@ -270,7 +269,6 @@ export default function ManageImportOrders() {
               orders.map((o) => (
                 <TableRow key={o._id} hover>
                   <TableCell>{new Date(o.createdAt).toLocaleDateString()}</TableCell>
-                  <TableCell>{o.contract_id?.contract_code || '—'}</TableCell>
                   <TableCell>{o.contract_id?.partner_id?.name || '—'}</TableCell>
                   <TableCell>{o.warehouse_manager_id?.email || '—'}</TableCell>
                   <TableCell>
