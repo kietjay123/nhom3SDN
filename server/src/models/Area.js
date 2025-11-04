@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { storageConditionsSchema } = require('./subSchemas');
 
 const areaSchema = new mongoose.Schema(
   {
@@ -6,6 +7,10 @@ const areaSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Area name is required'],
       trim: true,
+    },
+    storage_conditions: {
+      type: storageConditionsSchema,
+      required: [true, 'Storage conditions are required'],
     },
     description: {
       type: String,

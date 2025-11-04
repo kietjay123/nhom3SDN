@@ -6,6 +6,11 @@ const { EXPORT_ORDER_STATUSES } = require("../utils/constants")
 
 const exportOrderSchema = new mongoose.Schema(
   {
+    contract_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Contract",
+      required: false,
+    },
     warehouse_manager_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
