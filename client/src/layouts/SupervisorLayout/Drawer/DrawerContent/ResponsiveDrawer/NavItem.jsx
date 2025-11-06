@@ -28,6 +28,7 @@ export default function NavItem({ item, level = 0 }) {
   // Active menu item on page load
   const pathname = usePathname();
 
+  // Active menu item on page load
   useEffect(() => {
     if (pathname === item.url) handlerActiveItem(item.id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -35,10 +36,13 @@ export default function NavItem({ item, level = 0 }) {
 
   const iconcolor = theme.palette.text.primary;
 
+  // Active menu item on click
   const itemHandler = () => {
     if (downMD) handlerDrawerOpen(false);
   };
 
+
+  // Active menu item on page load
   return (
     <ListItemButton
       id={`${item.id}-btn`}
