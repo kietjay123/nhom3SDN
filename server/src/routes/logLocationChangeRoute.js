@@ -4,12 +4,10 @@ const logLocationChangeController = require('../controllers/logLocationChangeCon
 const authenticate = require('../middlewares/authenticate');
 const authorize = require('../middlewares/authorize');
 
-// Apply authentication middleware to all routes
 router.use(authenticate);
 
 
 
-// Get all location log
 router.get(
   '/',
   authorize([
