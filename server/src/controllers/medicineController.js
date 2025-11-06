@@ -22,7 +22,6 @@ const toShortMonth = (ym) => {
 };
 
 const medicineController = {
-  // ✅ Get all medicines with filters
   getMedicinesPaging: async (req, res) => {
     try {
       const { category, license_code, status, page, limit } = req.query;
