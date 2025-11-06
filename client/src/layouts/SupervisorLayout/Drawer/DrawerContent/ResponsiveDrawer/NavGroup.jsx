@@ -26,6 +26,7 @@ export default function NavGroup({ item }) {
     }
   };
 
+  // Render list
   return (
     <List
       component="div"
