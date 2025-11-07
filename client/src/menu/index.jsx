@@ -12,6 +12,7 @@ import representativeManager from './representative-manager';
 
 const menuItems = {
   items: [manage, uiElements, other],
+  // Static menu object for backward compatibility
   supervisor: [supervisor],
   warehouse: [warehouse],
   warehouseManager: [warehouseManager],

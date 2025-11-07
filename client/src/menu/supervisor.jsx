@@ -1,3 +1,4 @@
+// Static menu object for backward compatibility
 const supervisor = {
   id: 'group-supervisor',
   title: 'Manage',

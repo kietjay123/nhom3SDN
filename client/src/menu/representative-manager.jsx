@@ -1,3 +1,4 @@
+// Menu for representative manager
 const representativeManager = {
   id: 'group-manage',
   title: 'Manage',
