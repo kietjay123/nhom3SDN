@@ -9,14 +9,14 @@ import ThemeCustomization from '@/themes';
 import { RoleProvider } from '@/contexts/RoleContext';
 import { AuthProvider } from '@/contexts/AuthContext';
 
-/***************************  LAYOUT - CONFIG, THEME  ***************************/
-
+// PROVIDER WRAPPER
 export default function ProviderWrapper({ children }) {
   return (
     <ConfigProvider>
       <ThemeCustomization>
         <AuthProvider>
           <RoleProvider>
+            // @ts-ignore
             <Notistack>{children}</Notistack>
           </RoleProvider>
         </AuthProvider>

@@ -14,8 +14,7 @@ import MiniDrawerStyled from './MiniDrawerStyled';
 import { handlerDrawerOpen, useGetMenuMaster } from '@/states/menu';
 import { DRAWER_WIDTH } from '@/config';
 
-/***************************  ADMIN LAYOUT - DRAWER  ***************************/
-
+// MAIN DRAWER
 export default function MainDrawer({ window }) {
   const { menuMaster } = useGetMenuMaster();
   const drawerOpen = menuMaster.isDashboardDrawerOpened;

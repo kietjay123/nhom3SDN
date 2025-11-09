@@ -8,8 +8,7 @@ import { useRouter } from 'next/navigation';
 // @project
 import { APP_DEFAULT_PATH } from '@/config';
 
-/***************************  MAIN - DEFAULT PAGE  ***************************/
-
+// HOME PAGE
 export default function Home() {
   const router = useRouter();
 
@@ -31,6 +30,7 @@ export default function Home() {
             representative_manager: '/rm-dashboard'
           };
 
+          // Redirect to role-specific home page
           const homeUrl = roleHomeMap[role] || APP_DEFAULT_PATH;
           router.replace(homeUrl);
           return;

@@ -17,16 +17,14 @@ import { AvatarSize } from '@/enum';
 // @assets
 import { IconBolt } from '@tabler/icons-react';
 
-/***************************  NAVIGATION CARD - DATA  ***************************/
-
+// DATA
 const data = {
   title: 'Upgrade Your Experience',
   description: 'Take your experience to the next level with our premium offering. Buy now and enjoy more!',
   icon: <IconBolt size={16} />
 };
 
-/***************************  NAVIGATION CARD - CONTENT  ***************************/
-
+// CARD CONTENT
 function CardContent({ title, description, icon }) {
   return (
     <Stack sx={{ gap: 3 }}>
@@ -56,8 +54,7 @@ function CardContent({ title, description, icon }) {
   );
 }
 
-/***************************  DRAWER CONTENT - NAVIGATION CARD  ***************************/
-
+// NAV CARD
 export default function NavCard() {
   return (
     <MainCard sx={{ p: 1.5, bgcolor: 'grey.50', boxShadow: 'none', mb: 3 }}>

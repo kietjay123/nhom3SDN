@@ -3,8 +3,7 @@
 // @project
 import Error404Page from '@/components/Error404';
 
-/***************************  ERROR 404 - DATA  ***************************/
-
+///  DATA FOR ERROR 404 - NOT FOUND
 const data = {
   primaryBtn: { children: 'Back to Login Page', onClick: () => (window.location.href = '/auth/login') },
   heading: 'Looks like youve taken a wrong turn. Lets get you back on track!'
