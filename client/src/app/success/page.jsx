@@ -63,5 +63,6 @@ export default function SuccessPage() {
     }
   };
 
+  // Render Success component với updatedData
   return <Success {...updatedData} />;
 }

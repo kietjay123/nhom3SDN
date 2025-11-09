@@ -43,6 +43,7 @@ import useTrans from '@/hooks/useTrans';
 //   return debouncedValue;
 // };
 
+// get auth headers
 const getAuthHeaders = () => {
   const token = typeof window !== 'undefined' ? localStorage.getItem('auth-token') : null;
   return {

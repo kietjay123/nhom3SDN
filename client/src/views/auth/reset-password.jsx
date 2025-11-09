@@ -22,6 +22,7 @@ import { useForm } from 'react-hook-form';
 import { passwordSchema } from '@/utils/validationSchema';
 import Copyright from '@/sections/auth/Copyright';
 
+// components
 export default function ResetPassword() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -80,6 +81,7 @@ export default function ResetPassword() {
     verifyToken();
   }, [token, backendUrl]);
 
+  // Xuất hành khi token hợp lệ
   const onSubmit = async (formData) => {
     if (formData.password !== formData.confirmPassword) {
       setMessage('Passwords do not match.');

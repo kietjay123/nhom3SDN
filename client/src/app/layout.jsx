@@ -17,6 +17,7 @@ export const metadata = {
   description: `${branding.brandName} Pharmaceutical Distribution Warehouse`
 };
 
+// ROOT LAYOUT
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="mdl-js">

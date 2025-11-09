@@ -1,3 +1,4 @@
+// Static menu object for backward compatibility
 const other = {
   id: 'group-other',
   title: 'Other',

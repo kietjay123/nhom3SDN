@@ -12,6 +12,7 @@ import axios from 'axios';
 import { enqueueSnackbar } from 'notistack';
 import { useCallback, useState } from 'react';
 
+// eslint-disable-next-line react/prop-types
 function ManageUsers() {
   const trans = useTrans();
   const theme = useTheme();

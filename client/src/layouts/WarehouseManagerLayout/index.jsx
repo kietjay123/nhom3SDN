@@ -19,8 +19,7 @@ import Header from './Header';
 import { DRAWER_WIDTH } from '@/config';
 import { RoleGuard } from '@/views/components/RoleGuard';
 
-/***************************  WAREHOUSE MANAGER LAYOUT  ***************************/
-
+// WAREHOUSE MANAGER LAYOUT
 export default function WarehouseManagerLayout({ children }) {
   const { menuMasterLoading } = useGetMenuMaster();
 

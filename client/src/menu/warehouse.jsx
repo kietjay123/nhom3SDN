@@ -1,3 +1,4 @@
+// Menu for warehouse
 const warehouse = {
   id: 'group-manage',
   title: 'Warehouse Management',

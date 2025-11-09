@@ -12,6 +12,7 @@ import Box from '@mui/material/Box';
 import LogoMain from '@/components/logo/LogoMain';
 import GetImagePath from '@/utils/GetImagePath';
 
+// Images
 const dashBoardImage = {
   light: '/assets/images/graphics/hosting/drugs.jpg',
   dark: '/assets/images/graphics/hosting/dashboard-dark.svg'
@@ -21,8 +22,7 @@ const logoImage = {
   light: '/assets/images/graphics/hosting/logo.png'
 };
 
-/***************************  AUTH LAYOUT  ***************************/
-
+// Auth Layout
 export default function AuthLayout({ children }) {
   return (
     <Grid container sx={{ height: '100vh' }}>

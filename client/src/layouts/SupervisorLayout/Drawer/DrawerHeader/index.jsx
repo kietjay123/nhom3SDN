@@ -11,13 +11,14 @@ import Logo from '@/components/logo';
 // @assets
 import { IconLayoutSidebarLeftCollapse, IconLayoutSidebarRightCollapse } from '@tabler/icons-react';
 
-/***************************  DRAWER HEADER  ***************************/
+// DRAWER HEADER
 
 export default function DrawerHeader({ open }) {
   console.log('drawer header re-render');
   const { menuMaster } = useGetMenuMaster();
   const drawerOpen = menuMaster.isDashboardDrawerOpened;
 
+  // Common header content
   return (
     <Box sx={{ width: 1, px: 2, py: { xs: 2, md: 2.5 } }}>
       <Stack direction="row" sx={{ alignItems: 'center', justifyContent: open ? 'space-between' : 'center', height: 36 }}>

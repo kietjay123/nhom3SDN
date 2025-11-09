@@ -10,8 +10,7 @@ const data = {
   heading: 'Please try again later or feel free to contact us if the problem persists.'
 };
 
-/***************************  ERROR - INTERNAL SERVER ERROR  ***************************/
-
+// ERROR 500 PAGE
 export default function InternalServerError() {
   return <Error500Page {...data} />;
 }

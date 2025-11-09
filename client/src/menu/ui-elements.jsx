@@ -24,6 +24,12 @@ const uiElements = {
           type: 'item',
           url: '/utils/shadow'
         },
+        // {
+        //   id: 'border',
+        //   title: 'Border',
+        //   type: 'item',
+        //   url: '/utils/border'
+        // },
         {
           id: 'typography',
           title: 'Typography',

@@ -65,7 +65,7 @@ const createUser = async (req, res) => {
   }
 }
 
-// Hàm này sẽ thay thế hàm `getUsers` trước đó của tôi
+// Hàm này sẽ thay thế hàm `getUsers` trước đó
 const getAllUsers = async (req, res) => {
   try {
     const { page = 1, limit = 10, role, status, search } = req.query
@@ -427,6 +427,64 @@ const generateResetOTP = async (req, res) => {
   }
 }
 
+//less validation
+const getAllUsersV2 = async (req, res) => {
+  try {
+    const { page = 1, limit = 10, role, status, search } = req.query;
+    // Lấy các tham số query từ request, set mặc định page=1, limit=10
+
+    if (!req.user?.userId)
+      return res.status(401).json({ success: false, message: "Invalid user context" });
+    // Kiểm tra user login có hợp lệ hay không, nếu không trả về 401
+
+    const allowedRoles = [constants.USER_ROLES.SUPERVISOR, constants.USER_ROLES.WAREHOUSEMANAGER];
+    if (!allowedRoles.includes(req.user.role) && !req.user.is_manager)
+      return res.status(403).json({ success: false, message: "Access denied" });
+    // Kiểm tra quyền của user: phải là SUPERVISOR, WAREHOUSEMANAGER hoặc manager, nếu không thì 403
+
+    const pageNum = Math.max(1, parseInt(page));
+    const limitNum = Math.min(100, Math.max(1, parseInt(limit)));
+    // Chuẩn hóa page và limit: page >=1, limit từ 1-100
+
+    const filter = {};
+    if (role && Object.values(constants.USER_ROLES).includes(role)) filter.role = role;
+    if (status && Object.values(constants.USER_STATUSES).includes(status)) filter.status = status;
+    if (search?.trim()?.length >= 2) filter.email = { $regex: search.trim(), $options: "i" };
+    // Build filter: role, status, search email (regex, không phân biệt hoa thường)
+
+    const skip = (pageNum - 1) * limitNum;
+    const [users, total] = await Promise.all([
+      User.find(filter).select("-password -otp_login -otp_reset").sort({ createdAt: -1 }).skip(skip).limit(limitNum).lean(),
+      User.countDocuments(filter)
+    ]);
+    // Query database: lấy danh sách user theo filter với pagination và tổng số bản ghi
+
+    console.log("✅ User list accessed:", { userId: req.user.userId, filters: { role, status, search: !!search }, count: users.length });
+    // Log cơ bản: ai truy cập, filter gì, có bao nhiêu user trả về
+
+    res.status(200).json({
+      success: true,
+      data: users,
+      pagination: {
+        current_page: pageNum,
+        total_pages: Math.ceil(total / limitNum),
+        total_records: total,
+        per_page: limitNum,
+        has_next_page: pageNum < Math.ceil(total / limitNum),
+        has_prev_page: pageNum > 1,
+      },
+    });
+    // Trả response: dữ liệu users + thông tin phân trang
+
+  } catch (error) {
+    console.error("❌ Get all users error:", error);
+    res.status(500).json({ success: false, message: "Internal server error" });
+    // Nếu lỗi: log lỗi và trả về 500
+  }
+};
+
+
+
 module.exports = {
   createUser,
   getAllUsers, // Đây là hàm `getUsers` đã được đổi tên và mở rộng
@@ -436,4 +494,5 @@ module.exports = {
   toggleUserStatus,
   deleteUser,
   generateResetOTP,
+  getAllUsersV2,
 }

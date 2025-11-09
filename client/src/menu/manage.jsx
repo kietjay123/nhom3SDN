@@ -1,5 +1,5 @@
-/***************************  MENU ITEMS - APPLICATIONS  ***************************/
-
+// menu/manage.jsx
+// Static menu object for backward compatibility
 const manage = {
   id: 'group-manage',
   title: 'Manage',
