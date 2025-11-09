@@ -65,7 +65,7 @@ const createUser = async (req, res) => {
   }
 }
 
-// Hàm này sẽ thay thế hàm `getUsers` trước đó của tôi
+// Hàm này sẽ thay thế hàm `getUsers` trước đó
 const getAllUsers = async (req, res) => {
   try {
     const { page = 1, limit = 10, role, status, search } = req.query
@@ -427,6 +427,7 @@ const generateResetOTP = async (req, res) => {
   }
 }
 
+//less validation
 const getAllUsersV2 = async (req, res) => {
   try {
     const { page = 1, limit = 10, role, status, search } = req.query;

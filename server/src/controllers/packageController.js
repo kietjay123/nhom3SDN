@@ -308,6 +308,60 @@ const packageController = {
     }
   },
 
+  setPackageLocationV2: async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { location } = req.body;
+
+    // Kiểm tra input
+    if (!location)
+      return res.status(400).json({ error: 'Vị trí là bắt buộc' });
+
+    const parts = location.split('-');
+    if (parts.length !== 4)
+      return res.status(400).json({ error: 'Định dạng sai. Dùng "area-bay-row-column" (vd: A1-01-01-01)' });
+
+    // Lấy thông tin area và package
+    const [areaName, bay, row, column] = parts;
+    const area = await Area.findOne({ name: areaName });
+    if (!area)
+      return res.status(404).json({ error: `Không tìm thấy khu vực ${areaName}` });
+
+    const pkg = await Package.findById(id);
+    if (!pkg)
+      return res.status(404).json({ error: 'Không tìm thấy thùng' });
+
+    const oldLocId = pkg.location_id;
+
+    // Kiểm tra hoặc tạo mới location
+    let newLoc = await Location.findOne({ area_id: area._id, bay, row, column });
+
+    if (!newLoc) {
+      newLoc = await Location.create({ area_id: area._id, bay, row, column, available: false });
+    } else if (newLoc._id.equals(oldLocId)) {
+      return res.json({ message: 'Vị trí không thay đổi', location: newLoc });
+    } else if (!newLoc.available) {
+      return res.status(400).json({ error: 'Vị trí đã bị chiếm' });
+    } else {
+      await Location.findByIdAndUpdate(newLoc._id, { available: false });
+    }
+
+    // Cập nhật package và vị trí cũ
+    pkg.location_id = newLoc._id;
+    await pkg.save();
+
+    if (oldLocId && !oldLocId.equals(newLoc._id))
+      await Location.findByIdAndUpdate(oldLocId, { available: true });
+
+    // Trả kết quả
+    res.json({ message: 'Cập nhật vị trí thành công', location: newLoc });
+
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+},
+
+
   // New method with detailed input
   setPackageLocationDetailed: async (req, res) => {
     try {
