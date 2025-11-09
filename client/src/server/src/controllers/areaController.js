@@ -33,7 +33,7 @@ const createArea = asyncHandler(async (req, res) => {
   if (req.user.role !== USER_ROLES.SUPERVISOR) {
     return res.status(403).json({ 
       success: false, 
-      message: 'Chỉ supervisor mới có quyền tạo khu vực' 
+      message: 'Chỉ supervisor mới có quyền tạo' 
     });
   }
 
