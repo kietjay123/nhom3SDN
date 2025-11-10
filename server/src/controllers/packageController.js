@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 const packageService = require('../services/packageService');
 
 const packageController = {
-  // ✅ Get all packages
+  
   getAllPackages: async (req, res) => {
     try {
       const { page = 1, limit = 10, status, location_id } = req.query;
@@ -36,7 +36,7 @@ const packageController = {
     }
   },
 
-  // ✅ Get all available locations
+  // Get all available locations
   getAllLocations: async (req, res) => {
     try {
       const result = await packageService.getAllLocations();
@@ -59,7 +59,7 @@ const packageController = {
     }
   },
 
-  // ✅ Get package by ID
+  
   getPackageById: async (req, res) => {
     try {
       const { id } = req.params;
@@ -91,7 +91,7 @@ const packageController = {
     }
   },
 
-  // ✅ Create new package
+  
   createPackage: async (req, res) => {
     try {
       const packageData = req.body;
