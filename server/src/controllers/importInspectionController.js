@@ -19,8 +19,7 @@ exports.getByBatch = async (req, res) => {
   }
 };
 
-//Commit Check
-// Cập nhật vị trí thùng
+
 exports.updateLocation = async (req, res) => {
   try {
     const { id } = req.params;
