@@ -5,8 +5,8 @@ import dynamic from 'next/dynamic';
 
 const CheckInspections = dynamic(() => import('@/views/warehouse-manager/wm-check-inspections'));
 
-/***************************  IMPORT ORDERS MANAGEMENT  ***************************/
 
+// Page component for creating inspections based on check order ID
 export default function ImportOrdersPage() {
   return <CheckInspections />;
 }

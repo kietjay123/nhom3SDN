@@ -2,6 +2,7 @@
 
 import { Box, Typography, Paper } from '@mui/material';
 
+// Warehouse Manager Home Page
 export default function WarehouseManagerHomePage() {
   return (
     <Box sx={{ p: 3 }}>

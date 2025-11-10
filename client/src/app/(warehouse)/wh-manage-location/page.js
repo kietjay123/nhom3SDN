@@ -5,8 +5,7 @@ import dynamic from 'next/dynamic';
 
 const ViewListLocation = dynamic(() => import('@/views/warehouse/wh-location'));
 
-/***************************  IMPORT ORDERS MANAGEMENT  ***************************/
-
+// Page component for managing warehouse locations
 export default function ImportOrdersPage() {
   return <ViewListLocation />;
 }
