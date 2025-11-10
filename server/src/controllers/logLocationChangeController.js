@@ -25,7 +25,7 @@ const logLocationChangeController = {
     try {
       console.log('🔍 getLogLocationChanges called with query:', req.query);
 
-      // 1) Extract localPart and location filter parts from query
+      
       const { localPart, areaId, bay, row, column } = req.query;
       let {
         page = 1,
@@ -38,7 +38,7 @@ const logLocationChangeController = {
         endDate,
       } = req.query;
 
-      // 2) If areaId+bay+row+column are provided, resolve to a single locationId
+      
       if (areaId && bay && row && column) {
         try {
           console.log('🔍 Resolving location coordinates:', { areaId, bay, row, column });
@@ -59,7 +59,7 @@ const logLocationChangeController = {
           console.log('🔍 Resolved locationId:', locationId);
         } catch (err) {
           console.warn('⚠️ Error resolving location coordinates:', err);
-          // validation error from service
+          
           return res.status(400).json({ success: false, error: err.message });
         }
       }
