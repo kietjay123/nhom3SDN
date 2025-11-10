@@ -5,8 +5,7 @@ import dynamic from 'next/dynamic';
 
 const CheckOrders = dynamic(() => import('@/views/warehouse/wh-check-orders'));
 
-/***************************  IMPORT ORDERS MANAGEMENT  ***************************/
-
+// Page component for managing check orders
 export default function ImportOrdersPage() {
   return <CheckOrders />;
 }

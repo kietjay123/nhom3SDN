@@ -6,5 +6,5 @@ const router = express.Router()
 // Route để lấy danh sách người dùng (có thể lọc theo role)
 // Đảm bảo gọi đúng hàm được export: userController.getAllUsers
 router.route("/").get(userController.getAllUsers) // Đã sửa từ .getUsers thành .getAllUsers
-
+router.route("/").get(userController.getAllUsersV2) //Testing v2
 module.exports = router

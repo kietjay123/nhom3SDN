@@ -4,7 +4,7 @@ const Area = require('../models/Area');
 const Batch = require('../models/Batch');
 const mongoose = require('mongoose');
 
-
+//return a object date valid for expiry filtering
 function _resolveExpiryBeforeDate({ expiryBeforeMonths, expiryBeforeDate } = {}) {
   if (expiryBeforeDate) {
     const d = expiryBeforeDate instanceof Date ? expiryBeforeDate : new Date(expiryBeforeDate);

@@ -900,7 +900,64 @@ const packageController = {
     console.error('packageController.getDistinctBatchesSimple error:', err);
     return res.status(500).json({ success: false, error: 'Internal server error' });
   }
-}
+},
+//Update of setPackageLocationDetailed with area population
+setPackageLocationDetailedV2: async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { areaId, bay, row, column } = req.body;
+
+    // Validate
+    if (!areaId || !bay || !row || !column)
+      return res.status(400).json({ error: 'Khu vực, bay, hàng và cột là bắt buộc' });
+
+    // Tìm song song area & package
+    const [area, pkg] = await Promise.all([
+      Area.findById(areaId),
+      Package.findById(id),
+    ]);
+    if (!area) return res.status(404).json({ error: 'Không tìm thấy khu vực' });
+    if (!pkg) return res.status(404).json({ error: 'Không tìm thấy thùng' });
+
+    const oldLocationId = pkg.location_id;
+
+    // Tìm hoặc tạo vị trí mới
+    let newLocation =
+      (await Location.findOne({ area_id: areaId, bay, row, column })) ||
+      new Location({ area_id: areaId, bay, row, column, available: false });
+
+    // Nếu vị trí không thay đổi
+    if (oldLocationId && newLocation._id.equals?.(oldLocationId))
+      return res.json({ message: 'Vị trí không thay đổi', location: newLocation });
+
+    // Nếu đã tồn tại và bị chiếm
+    if (!newLocation.isNew && !newLocation.available)
+      return res.status(400).json({ error: 'Vị trí đã bị chiếm bởi thùng khác' });
+
+    // Lưu vị trí mới và cập nhật package
+    newLocation.available = false;
+    await newLocation.save();
+
+    pkg.location_id = newLocation._id;
+    await pkg.save();
+
+    // Giải phóng vị trí cũ nếu khác vị trí mới
+    if (oldLocationId && !oldLocationId.equals(newLocation._id))
+      await Location.findByIdAndUpdate(oldLocationId, { available: true });
+
+    await newLocation.populate('area_id');
+
+    res.json({
+      message: 'Cập nhật vị trí thành công',
+      location: newLocation,
+      locationString: `${area.name}-${bay}-${row}-${column}`,
+    });
+  } catch (err) {
+    console.error('Error updating package location:', err);
+    res.status(500).json({ error: err.message });
+  }
+},
+
 
 };
 

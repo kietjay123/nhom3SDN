@@ -2,6 +2,7 @@
 import { useParams } from 'next/navigation';
 import InternalImportOrderDetail from '../../../../views/warehouse-manager/internal-import-order-detail';
 
+// Page component for internal import order detail
 const InternalImportOrderDetailPage = () => {
   const params = useParams();
   const orderId = params.orderId;

@@ -21,7 +21,7 @@ const areaSchema = new mongoose.Schema(
   {},
 );
 
-// Thêm index để tối ưu truy vấn
+// Thêm index để tối ưu truy vấnn
 areaSchema.index({ name: 1 }, { unique: true });
 
 module.exports = mongoose.model('Area', areaSchema);

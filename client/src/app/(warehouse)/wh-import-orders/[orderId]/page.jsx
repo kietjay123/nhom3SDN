@@ -5,8 +5,7 @@ import dynamic from 'next/dynamic';
 
 const AssignedInboundOrderDetail = dynamic(() => import('@/views/warehouse/ImportOrderDetail'));
 
-/***************************  AUTH - LOGIN  ***************************/
-
+// Page component for internal import order detail
 export default function Login() {
   return <AssignedInboundOrderDetail />;
 }
