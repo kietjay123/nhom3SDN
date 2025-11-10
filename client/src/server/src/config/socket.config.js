@@ -9,7 +9,7 @@ const setupSocketIO = (server, options = {}) => {
         process.env.CLIENT_URL,
       ].filter(Boolean);
 
-      // Cho phép kết nối từ localhost và vercel
+      // Cho phép kết nối từ localhost và vercell
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
